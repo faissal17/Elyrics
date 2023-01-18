@@ -1,9 +1,6 @@
-var card = document.getElementById("card");
+var el = document.getElementById("wrapper");
+var toggleButton = document.getElementById("menu-toggle");
 
-function Register() {
-    card.style.transform = "rotateY(-180deg)";
-}
-
-function login() {
-    card.style.transform = "rotateY(0deg)";
-}
+toggleButton.onclick = function() {
+    el.classList.toggle("toggled");
+};

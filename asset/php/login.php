@@ -1,5 +1,6 @@
 <?php
-
+session_start();
+session_destroy();
 ?>
 
 <!DOCTYPE html>
@@ -26,31 +27,17 @@
                 <div class="card-front">
                     <h2>Login</h2>
                     <form method="POST" action="user.php">
-                        <input type="email" class="input-box" placeholder="Email">
-                        <input type="password" class="input-box" placeholder="Password">
-                        <button type="submit" class="submit-btn">Submit</button>
+                        <input type="email" class="input-box" placeholder="Email" name="email">
+                        <input type="password" class="input-box" placeholder="Password" name="password">
+                        <button type="submit" class="submit-btn" name="login">Login</button>
                         <input type="checkbox"><span>Remember Me</span>
                     </form>
-                    <button type="button" class="btn" onclick="Register()">I'm New Here</button>
-                </div>
-                <div class="card-back">
-                    <h2>Register</h2>
-                    <form>
-                        <input type="text" class="input-box" placeholder="First Name">
-                        <input type="text" class="input-box" placeholder="Last Name">
-                        <input type="email" class="input-box" placeholder="Email">
-                        <input type="password" class="input-box" placeholder="Password">
-                        <button type="submit" class="submit-btn">Submit</button>
-                        <input type="checkbox"><span>Remember Me</span>
-                    </form>
-                    <button type="button" class="btn" onclick="login()">Already Have an account</button>
                 </div>
             </div>
         </div>
     </div>
 </body>
 <?php
-session_start();
 if (isset($_SESSION['type_message']))
     echo "<script>Register()</script>";
 ?>
