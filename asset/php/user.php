@@ -45,6 +45,12 @@ class Login extends Connection
             }
         }
     }
+
+
+
+    public function creat()
+    {
+    }
 }
 if (isset($_POST['login'])) {
     $user = new Login($_POST['email'], $_POST['password']);

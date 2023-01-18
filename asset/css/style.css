@@ -71,7 +71,7 @@
     font-size: 12px;
 }
 
-button {
+.submit-btn {
     width: 100%;
     background: transparent;
     border: 1px solid #fff;
@@ -83,7 +83,7 @@ button {
     box-sizing: border-box;
     outline: none;
     text-align: center;
-    color: #fff;
+    color: #eebbc3;
     cursor: pointer;
 }
 
@@ -94,10 +94,11 @@ span {
 
 #wrapper {
     overflow-x: hidden;
-    background-image: linear-gradient( to right, #baccf3, #a2baea, #a7abef, #d4d8f8, #ddddfa);
+    background: #232946;
 }
 
 #sidebar-wrapper {
+    background: #b8c1ec;
     min-height: 100vh;
     margin-left: -15rem;
     -webkit-transition: margin 0.25s ease-out;
@@ -152,6 +153,13 @@ span {
     }
 }
 
-#cart {
-    background-color: beige;
+#add {
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 15px;
+    margin-right: 10px;
+    height: 10vh;
+    width: 6rem;
+    height: 3rem;
+    color: #232946;
 }
