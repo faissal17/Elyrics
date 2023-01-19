@@ -1,10 +1,9 @@
 <?php
-session_start();
-
+require_once 'user.php';
+$resu = new Login();
+$songs = $resu->Read();
 if (!isset($_SESSION["email"]))
     header('location: login.php');
-
-
 
 ?>
 
@@ -47,48 +46,87 @@ if (!isset($_SESSION["email"]))
                 <div class="d-flex align-items-center">
                     <i class="fas fa-align-left primary-text text-white fs-4 me-3" id="menu-toggle"></i>
                 </div>
+                <div class="ms-auto" onclick="addbtn()">
+                    <a href="#modal-task" data-bs-toggle="modal" class="btn btn-secondary" id="add"><i class="bi bi-plus-lg text-white"></i> Add Lyrics</a>
+                </div>
             </nav>
+            <table id="example" class="table table-hover text-white" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Titlel</th>
+                        <th>Artist</th>
+                        <th>Lyrics</th>
+                        <th>Date</th>
+                        <th>Album</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    foreach ($songs as $song) {
+                    ?>
+                        <tr href="#modal-task" data-bs-toggle="modal" class="text-decoration-none text-white">
+
+
+                            <td class="text-white"><?php echo $song['title'] ?></td>
+                            <td class="text-white"><?php echo $song['artist'] ?></td>
+                            <td class="text-white text-truncate"><?php echo $song['lyrics'] ?></td>
+                            <td class="text-white"><?php echo $song['date'] ?></td>
+                            <td class="text-white"><?php echo $song['album'] ?></td>
+                        </tr>
+
+                    <?php
+                    }
+                    ?>
+                </tbody>
+            </table>
         </div>
-        <div onclick="addbtn()">
-            <a href="#modal-task" data-bs-toggle="modal" class="btn btn-secondary" id="add"><i class="fa fa-plus"></i> Add</a>
-        </div>
-    </div>
-    <!-- TASK MODAL -->
-    <div class="modal fade" id="modal-task">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form action="scripts.php" method="POST" id="form-task">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Add Task</h5>
-                        <a href="#" class="btn-close" data-bs-dismiss="modal"></a>
-                    </div>
-                    <div class="modal-body">
-                        <!-- This Input Allows Storing Task Index  -->
-                        <input type="hidden" name="task-id" id="task-id">
-                        <div class="mb-3">
-                            <label class="form-label">Title</label>
-                            <input type="text" name="title" class="form-control title_song" id="title-song" />
+
+        <!-- Modal -->
+        <div class="modal fade" id="modal-task">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="user.php" method="POST" id="form-task">
+                        <div class="modal-header">
+                            <h5 class="modal-title fw-bold">Add Lyrics</h5>
+                            <a href="#" class="btn-close" data-bs-dismiss="modal"></a>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">Artist</label>
-                            <input type="text" name="Artist" class="form-control artist_song" id="artist-song" />
+                        <div class="modal-body">
+                            <!-- This Input Allows Storing Task Index  -->
+                            <input type="hidden" id="task-id" name="task-id">
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label class="form-label">Song title</label>
+                                    <input type="text" class="form-control" name="title" id="title-id" />
+                                </div>
+                                <div class="mb-3 col">
+                                    <label class="form-label">Artist</label>
+                                    <input type="text" class="form-control" id="artist" name="name" />
+                                </div>
+                                <div class="mb-3 col">
+                                    <label class="form-label">Creation date</label>
+                                    <input type="date" class="form-control" id="date" name="date" />
+                                </div>
+                                <div class="mb-3 col">
+                                    <label class="form-label">Album</label>
+                                    <input type="text" class="form-control" id="album" name="album" />
+                                </div>
+                            </div>
+                            <div class="mb-0">
+                                <label class="form-label">Lyrics</label>
+                                <textarea class="form-control" rows="5" id="lyrics" name="Lyrics"></textarea>
+                                <div class="modal-footer">
+                                    <a href="#" class="btn btn-white" data-bs-dismiss="modal">Cancel</a>
+                                    <button type="submit" name="delete" class="btn btn-danger task-action-btn" id="task-delete-btn">Delete</a>
+                                        <button type="submit" name="update" class="btn btn-warning task-action-btn" id="task-update-btn">Update</a>
+                                            <button type="submit" name="save" class="btn btn-primary task-action-btn" id="task-save-btn">Save</button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">Lyrics</label>
-                            <input type="text" name="title" class="form-control lyrics_song" id="lyrics-song" />
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <a href="#" class="btn btn-white" data-bs-dismiss="modal">Cancel</a>
-                        <button type="submit" name="delete" class="btn btn-danger task-action-btn" id="task-delete-btn">Delete</a>
-                            <button type="submit" name="update" class="btn btn-warning task-action-btn" id="task-update-btn">Update</a>
-                                <button type="submit" name="save" class="btn btn-primary task-action-btn" id="task-save-btn">Save</button>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
-    </div>
 </body>
 <script src="../js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 </html>

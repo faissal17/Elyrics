@@ -1,0 +1,14 @@
+<?php
+                        foreach ($songs as $song) {
+                        ?>
+                            <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+                                <div>
+                                    <h3 class="fs-1"><?php echo $song['title'] ?></h3>
+                                    <p class="fs-2">Artist</p>
+                                    <p class="fs-4">Date</p>
+                                    <p class="fs-4">Album</p>
+                                </div>
+                            </div>
+                        <?php
+                        }
+                        ?>

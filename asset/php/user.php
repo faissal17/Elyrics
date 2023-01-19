@@ -8,12 +8,22 @@ class Login extends Connection
     public $id;
     public $email;
     public $password;
+    public $title;
+    public $artist;
+    public $lyrics;
+    public $date;
+    public $album;
 
-    function __construct($email = null, $password = null, $id = null)
+    function __construct($email = null, $password = null, $id = null, $title = null, $artist = null, $lyrics = null, $date = null, $album = null)
     {
         $this->id = $id;
         $this->email = $email;
         $this->password = $password;
+        $this->title = $title;
+        $this->artist = $artist;
+        $this->lyrics = $lyrics;
+        $this->date =  $date;
+        $this->date =  $album;
     }
 
 
@@ -46,13 +56,58 @@ class Login extends Connection
         }
     }
 
-
-
-    public function creat()
+    public function Savesong()
     {
+        $sql = "INSERT INTO `song`(`title`, `artist`, `lyrics`, `date`, `album`) VALUES (?,?,?,?,?)";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$this->title, $this->artist, $this->lyrics, $this->date, $this->album]);
+        if ($stmt) {
+            $_SESSION['type_message'] = "success";
+            $_SESSION['message'] = 'Noice';
+            header('location: dashboard.php');
+        } else {
+            $_SESSION['type_message'] = "error";
+            $_SESSION['message'] = 'Somthing went wrong !';
+        }
+    }
+
+
+    public function Read()
+    {
+        $sql = "SELECT * FROM `song`";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    public function update()
+    {
+        $sql = "UPDATE `song` SET `title`= ?,`artist`= ?,`lyrics`= ?,`date`= ?,`album`= ? WHERE id = ?";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$this->title, $this->artist, $this->lyrics, $this->date, $this->album]);
+        if ($stmt) {
+            $_SESSION['type_message'] = "success";
+            $_SESSION['message'] = 'songs are updated';
+        } else {
+            $_SESSION['type_message'] = "error";
+            $_SESSION['message'] = 'Retry again !';
+        }
     }
 }
 if (isset($_POST['login'])) {
     $user = new Login($_POST['email'], $_POST['password']);
     $user->login();
+}
+
+if (isset($_POST['save'])) {
+    $user = new Login;
+    $user->title = $_POST['title'];
+    $user->artist = $_POST['name'];
+    $user->date = $_POST['date'];
+    $user->lyrics = $_POST['Lyrics'];
+    $user->album = $_POST['album'];
+    // var_dump($user);
+    // die;
+    $user->Savesong();
 }
