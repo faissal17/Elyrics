@@ -76,8 +76,6 @@ class Login extends Connection
     {
         $sql = "SELECT * FROM `song`";
         $stmt = $this->connect()->query($sql);
-        // $stmt->execute();
-        // $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         while ($result = $stmt->fetch()) {
             echo '
             <tr>
@@ -91,18 +89,14 @@ class Login extends Connection
         }
         // return $result;
     }
-    public function update()
+
+    public function updatee($id, $title, $artist, $lyrics, $date, $album)
     {
-        $sql = "UPDATE `song` SET `title`= ?,`artist`= ?,`lyrics`= ?,`date`= ?,`album`= ? WHERE id = ?";
-        $stmt = $this->connect()->prepare($sql);
-        $stmt->execute([$this->title, $this->artist, $this->lyrics, $this->date, $this->album]);
-        if ($stmt) {
-            $_SESSION['type_message'] = "success";
-            $_SESSION['message'] = 'songs are updated';
-        } else {
-            $_SESSION['type_message'] = "error";
-            $_SESSION['message'] = 'Retry again !';
-        }
+        $sql = "UPDATE `song` SET `title`= '$title',`artist`= '$artist',`lyrics`= '$lyrics',`date`= '$date',`album`= '$album' WHERE id = '$id'";
+        $stmt = $this->connect()->query($sql);
+        $result = $stmt->fetch();
+
+        return $result;
     }
 }
 if (isset($_POST['login'])) {
@@ -117,7 +111,24 @@ if (isset($_POST['save'])) {
     $user->date = $_POST['date'];
     $user->lyrics = $_POST['Lyrics'];
     $user->album = $_POST['album'];
-    // var_dump($user);
-    // die;
     $user->Savesong();
+}
+
+if (isset($_POST['update'])) {
+    $id = $_POST['task-id'];
+    $title = $_POST['title'];
+    $artist = $_POST['name'];
+    $lyrics = $_POST['Lyrics'];
+    $date = $_POST['date'];
+    $album = $_POST['album'];
+    $user = new Login();
+    $test = $user->Updatee($id, $title, $artist, $lyrics, $date, $album);
+
+    if ($test) {
+        echo '<script>alert("oui")</script>';
+        header('location: dashboard.php');
+    } else {
+        echo '<script>alert("no")</script>';
+        header('location: dashboard.php');
+    }
 }

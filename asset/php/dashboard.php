@@ -114,18 +114,21 @@ if (!isset($_SESSION["email"]))
                     </div>
                 </div>
 </body>
-<script src="../js/script.js"></script>
+<script src="../asset/js/script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 </html>
 <script>
     function editdTask(id) {
+        document.getElementById('task-save-btn').style.display = 'none';
+        document.getElementById('task-delete-btn').style.display = 'block';
+        document.getElementById('task-update-btn').style.display = 'block';
+        document.getElementById('task-id').value = id;
         document.getElementById('title-id').value = document.getElementById("songg" + id).getAttribute('data');
         document.getElementById('artist').value = document.getElementById("artistt" + id).getAttribute('data');
         document.getElementById('lyrics').value = document.getElementById("lyricss" + id).getAttribute('data');
         document.getElementById('date').value = document.getElementById("datee" + id).getAttribute('data');
         document.getElementById('album').value = document.getElementById("albumm" + id).getAttribute('data');
-
     }
 
     function addbtn() {
