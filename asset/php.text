@@ -1,14 +1,43 @@
-<?php
-                        foreach ($songs as $song) {
-                        ?>
-                            <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                                <div>
-                                    <h3 class="fs-1"><?php echo $song['title'] ?></h3>
-                                    <p class="fs-2">Artist</p>
-                                    <p class="fs-4">Date</p>
-                                    <p class="fs-4">Album</p>
-                                </div>
-                            </div>
-                        <?php
-                        }
-                        ?>
+<table id="example" class="table table-hover text-white" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Titlel</th>
+                        <th>Artist</th>
+                        <th>Lyrics</th>
+                        <th>Date</th>
+                        <th>Album</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    foreach ($songs as $song) {
+                    ?>
+                        <tr href="#modal-task" data-bs-toggle="modal" class="text-decoration-none text-white">
+
+
+                            <td class="text-white"><?php echo $song['title'] ?></td>
+                            <td class="text-white"><?php echo $song['artist'] ?></td>
+                            <td class="text-white text-truncate"><?php echo $song['lyrics'] ?></td>
+                            <td class="text-white"><?php echo $song['date'] ?></td>
+                            <td class="text-white"><?php echo $song['album'] ?></td>
+                        </tr>
+
+                    <?php
+                    }
+                    ?>
+                </tbody>
+            </table>
+
+
+
+             while ($result = $stmt->fetchAll()) {
+            '
+                <td id="songg' . $result['id'] . '" data="' . $result['title'] . '"></td>;
+                <td id="artistt' . $result['id'] . '" data="' . $result['artist'] . '"></td>;
+                <td id="datee' . $result['id'] . '" data="' . $result['date'] . '"></td>;
+                <td id="albumm' . $result['id'] . '" data="' . $result['album'] . '"></td>;
+                <td id="lyricss' . $result['id'] . '" data="' . $result['lyrics'] . '"></td>;
+            ';
+        }
+        return $result;
+    }

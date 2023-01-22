@@ -1,7 +1,5 @@
 <?php
 require_once 'user.php';
-$resu = new Login();
-$songs = $resu->Read();
 if (!isset($_SESSION["email"]))
     header('location: login.php');
 
@@ -50,83 +48,90 @@ if (!isset($_SESSION["email"]))
                     <a href="#modal-task" data-bs-toggle="modal" class="btn btn-secondary" id="add"><i class="bi bi-plus-lg text-white"></i> Add Lyrics</a>
                 </div>
             </nav>
-            <table id="example" class="table table-hover text-white" style="width:100%">
-                <thead>
-                    <tr>
-                        <th>Titlel</th>
-                        <th>Artist</th>
-                        <th>Lyrics</th>
-                        <th>Date</th>
-                        <th>Album</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    foreach ($songs as $song) {
-                    ?>
-                        <tr href="#modal-task" data-bs-toggle="modal" class="text-decoration-none text-white">
-
-
-                            <td class="text-white"><?php echo $song['title'] ?></td>
-                            <td class="text-white"><?php echo $song['artist'] ?></td>
-                            <td class="text-white text-truncate"><?php echo $song['lyrics'] ?></td>
-                            <td class="text-white"><?php echo $song['date'] ?></td>
-                            <td class="text-white"><?php echo $song['album'] ?></td>
-                        </tr>
-
-                    <?php
-                    }
-                    ?>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Modal -->
-        <div class="modal fade" id="modal-task">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <form action="user.php" method="POST" id="form-task">
-                        <div class="modal-header">
-                            <h5 class="modal-title fw-bold">Add Lyrics</h5>
-                            <a href="#" class="btn-close" data-bs-dismiss="modal"></a>
-                        </div>
-                        <div class="modal-body">
-                            <!-- This Input Allows Storing Task Index  -->
-                            <input type="hidden" id="task-id" name="task-id">
-                            <div class="row">
-                                <div class="mb-3 col">
-                                    <label class="form-label">Song title</label>
-                                    <input type="text" class="form-control" name="title" id="title-id" />
-                                </div>
-                                <div class="mb-3 col">
-                                    <label class="form-label">Artist</label>
-                                    <input type="text" class="form-control" id="artist" name="name" />
-                                </div>
-                                <div class="mb-3 col">
-                                    <label class="form-label">Creation date</label>
-                                    <input type="date" class="form-control" id="date" name="date" />
-                                </div>
-                                <div class="mb-3 col">
-                                    <label class="form-label">Album</label>
-                                    <input type="text" class="form-control" id="album" name="album" />
-                                </div>
-                            </div>
-                            <div class="mb-0">
-                                <label class="form-label">Lyrics</label>
-                                <textarea class="form-control" rows="5" id="lyrics" name="Lyrics"></textarea>
-                                <div class="modal-footer">
-                                    <a href="#" class="btn btn-white" data-bs-dismiss="modal">Cancel</a>
-                                    <button type="submit" name="delete" class="btn btn-danger task-action-btn" id="task-delete-btn">Delete</a>
-                                        <button type="submit" name="update" class="btn btn-warning task-action-btn" id="task-update-btn">Update</a>
-                                            <button type="submit" name="save" class="btn btn-primary task-action-btn" id="task-save-btn">Save</button>
-                                </div>
-                            </div>
-                        </div>
+            <div class="row my-5">
+                <div class="col">
+                    <table class="table bg-secondary rounded shadow-sm  table-hover">
+                        <thead>
+                            <tr>
+                                <th>Titlel</th>
+                                <th>Artist</th>
+                                <th>Lyrics</th>
+                                <th>Date</th>
+                                <th>Album</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $resu = new Login();
+                            $songs = $resu->Read();
+                            ?>
+                        </tbody>
+                    </table>
                 </div>
-            </div>
-        </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="modal-task">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form action="user.php" method="POST" id="form-task">
+                                <div class="modal-header">
+                                    <h5 class="modal-title fw-bold">Add Lyrics</h5>
+                                    <a href="#" class="btn-close" data-bs-dismiss="modal"></a>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- This Input Allows Storing Task Index  -->
+                                    <input type="hidden" id="task-id" name="task-id">
+                                    <div class="row">
+                                        <div class="mb-3 col">
+                                            <label class="form-label">Song title</label>
+                                            <input type="text" class="form-control" name="title" id="title-id" />
+                                        </div>
+                                        <div class="mb-3 col">
+                                            <label class="form-label">Artist</label>
+                                            <input type="text" class="form-control" id="artist" name="name" />
+                                        </div>
+                                        <div class="mb-3 col">
+                                            <label class="form-label">Creation date</label>
+                                            <input type="date" class="form-control" id="date" name="date" />
+                                        </div>
+                                        <div class="mb-3 col">
+                                            <label class="form-label">Album</label>
+                                            <input type="text" class="form-control" id="album" name="album" />
+                                        </div>
+                                    </div>
+                                    <div class="mb-0">
+                                        <label class="form-label">Lyrics</label>
+                                        <textarea class="form-control" rows="5" id="lyrics" name="Lyrics"></textarea>
+                                        <div class="modal-footer">
+                                            <a href="#" class="btn btn-white" data-bs-dismiss="modal">Cancel</a>
+                                            <button type="submit" name="delete" class="btn btn-danger task-action-btn" id="task-delete-btn">Delete</a>
+                                                <button type="submit" name="update" class="btn btn-warning task-action-btn" id="task-update-btn">Update</a>
+                                                    <button type="submit" name="save" class="btn btn-primary task-action-btn" id="task-save-btn">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
 </body>
 <script src="../js/script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 </html>
+<script>
+    function editdTask(id) {
+        document.getElementById('title-id').value = document.getElementById("songg" + id).getAttribute('data');
+        document.getElementById('artist').value = document.getElementById("artistt" + id).getAttribute('data');
+        document.getElementById('lyrics').value = document.getElementById("lyricss" + id).getAttribute('data');
+        document.getElementById('date').value = document.getElementById("datee" + id).getAttribute('data');
+        document.getElementById('album').value = document.getElementById("albumm" + id).getAttribute('data');
+
+    }
+
+    function addbtn() {
+        document.getElementById('form-task').reset();
+        document.getElementById('task-save-btn').style.display = 'block';
+        document.getElementById('task-delete-btn').style.display = 'none';
+        document.getElementById('task-update-btn').style.display = 'none';
+    }
+</script>

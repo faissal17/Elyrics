@@ -163,3 +163,7 @@ span {
     height: 3rem;
     color: #232946;
 }
+
+.tds {
+    cursor: pointer;
+}
