@@ -26,7 +26,6 @@ class Login extends Connection
         $this->date =  $album;
     }
 
-
     public function login()
     {
         $sql = "SELECT * FROM `login` WHERE email = ?";
@@ -37,7 +36,6 @@ class Login extends Connection
         // die;
         if (!isset($result["password"])) {
             // die("hhh");
-            $_SESSION['type_message'] = "error";
             $_SESSION['message'] = "Email incorrect";
             header('location: login.php');
         } else {
@@ -49,7 +47,6 @@ class Login extends Connection
                 $_SESSION['password'] = $result['password'];
                 header('location: dashboard.php');
             } else {
-                $_SESSION['type_message'] = "error";
                 $_SESSION['message'] = 'Password incorrect';
                 header('location: login.php');
             }
@@ -62,11 +59,10 @@ class Login extends Connection
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute([$this->title, $this->artist, $this->lyrics, $this->date, $this->album]);
         if ($stmt) {
-            $_SESSION['type_message'] = "success";
+
             $_SESSION['message'] = 'Noice';
             header('location: dashboard.php');
         } else {
-            $_SESSION['type_message'] = "error";
             $_SESSION['message'] = 'Somthing went wrong !';
         }
     }
@@ -87,7 +83,7 @@ class Login extends Connection
             </tr>
             ';
         }
-        // return $result;
+        return $result;
     }
 
     public function updatee($id, $title, $artist, $lyrics, $date, $album)
@@ -96,7 +92,42 @@ class Login extends Connection
         $stmt = $this->connect()->query($sql);
         $result = $stmt->fetch();
 
-        return $result;
+        // return $result;
+    }
+
+    public function delete()
+    {
+        $sql = "DELETE FROM `song` WHERE id = ?";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$this->id]);
+        if ($stmt) {
+
+            $_SESSION['message'] = 'song are deleted';
+        } else {
+            $_SESSION['message'] = 'Retry again !';
+        }
+    }
+
+    public function CounArtist()
+    {
+        $sql = "SELECT COUNT(artist) FROM song";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+    public function CounTitle()
+    {
+        $sql = "SELECT COUNT(title) FROM song";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+    public function CountAdmin()
+    {
+        $sql = "SELECT COUNT(email) FROM login";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetch();
     }
 }
 if (isset($_POST['login'])) {
@@ -131,4 +162,13 @@ if (isset($_POST['update'])) {
         echo '<script>alert("no")</script>';
         header('location: dashboard.php');
     }
+}
+
+if (isset($_POST['delete'])) {
+    // var_dump($_POST);
+    // die;
+    $user = new Login();
+    $user->id = $_POST['task-id'];
+    $user->delete();
+    header('location: dashboard.php');
 }

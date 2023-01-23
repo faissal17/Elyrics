@@ -1,6 +1,8 @@
 <?php
 session_start();
 session_destroy();
+
+
 ?>
 
 <!DOCTYPE html>
@@ -37,10 +39,6 @@ session_destroy();
         </div>
     </div>
 </body>
-<?php
-if (isset($_SESSION['type_message']))
-    echo "<script>Register()</script>";
-?>
 
 <script src="../js/script.js"></script>
 
