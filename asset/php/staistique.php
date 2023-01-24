@@ -27,7 +27,7 @@ $user = new login();
     <div class="d-flex" id="wrapper">
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
-            <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom"><i class="fa fa-dashboard"></i> Dashboard</div>
+            <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom"><i class="fas fa-chart-line"></i> Statistique</div>
             <div class="list-group list-group-flush my-3">
                 <a href="dashboard.php" class="list-group-item list-group-item-action bg-transparent second-text active"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
                 <a href="staistique.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i class="fas fa-chart-line me-2"></i>Statistique</a>
@@ -51,17 +51,17 @@ $user = new login();
             <div class="container-fluid px-4">
                 <div class="row g-3 my-2">
                     <div class="col-md-4">
-                        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+                        <div class="p-3 bg-secondary shadow-sm d-flex justify-content-around align-items-center rounded">
                             <div>
                                 <p class="fs-5">Artist</p>
                                 <h3 class="fs-2"><?php echo $user->CounArtist()['COUNT(artist)'] ?></h3>
                             </div>
-                            <i class="fas fa-microphone fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                            <i class="fas fa-microphone  fs-1 primary-text border rounded-full secondary-bg p-3"></i>
                         </div>
                     </div>
 
                     <div class="col-md-4">
-                        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+                        <div class="p-3 bg-secondary shadow-sm d-flex justify-content-around align-items-center rounded">
                             <div>
                                 <p class="fs-5">Title</p>
                                 <h3 class="fs-2"><?php echo $user->CounTitle()['COUNT(title)'] ?></h3>
@@ -71,7 +71,7 @@ $user = new login();
                     </div>
 
                     <div class="col-md-4">
-                        <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
+                        <div class="p-3 bg-secondary shadow-sm d-flex justify-content-around align-items-center rounded">
                             <div>
                                 <p class="fs-5">Admin</p>
                                 <h3 class="fs-2"><?php echo $user->CountAdmin()['COUNT(email)'] ?></h3>

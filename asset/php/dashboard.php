@@ -100,9 +100,12 @@ if (!isset($_SESSION["email"]))
                                 <input type="text" class="form-control" id="album" name="album" />
                             </div>
                         </div>
+                        <div class="duplicated-form">
+                        </div>
                         <div class="mb-0">
                             <label class="form-label">Lyrics</label>
                             <textarea class="form-control" rows="5" id="lyrics" name="Lyrics"></textarea>
+
                             <div class="modal-footer">
                                 <a href="#" class="btn btn-white" data-bs-dismiss="modal">Cancel</a>
                                 <button type="submit" name="delete" class="btn btn-danger task-action-btn" id="task-delete-btn">Delete</a>
@@ -114,6 +117,7 @@ if (!isset($_SESSION["email"]))
             </div>
         </div>
     </div>
+
 </body>
 <script src="../js/script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

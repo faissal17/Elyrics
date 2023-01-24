@@ -36,7 +36,6 @@ class Login extends Connection
         // die;
         if (!isset($result["password"])) {
             // die("hhh");
-            $_SESSION['message'] = "Email incorrect";
             header('location: login.php');
         } else {
             $res = password_verify($this->password, $result["password"]);
@@ -47,7 +46,6 @@ class Login extends Connection
                 $_SESSION['password'] = $result['password'];
                 header('location: dashboard.php');
             } else {
-                $_SESSION['message'] = 'Password incorrect';
                 header('location: login.php');
             }
         }
@@ -59,8 +57,6 @@ class Login extends Connection
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute([$this->title, $this->artist, $this->lyrics, $this->date, $this->album]);
         if ($stmt) {
-
-            $_SESSION['message'] = 'Noice';
             header('location: dashboard.php');
         } else {
             $_SESSION['message'] = 'Somthing went wrong !';
@@ -130,6 +126,10 @@ class Login extends Connection
         return $stmt->fetch();
     }
 }
+
+
+// Controllers that controll the ooperation
+
 if (isset($_POST['login'])) {
     $user = new Login($_POST['email'], $_POST['password']);
     $user->login();
